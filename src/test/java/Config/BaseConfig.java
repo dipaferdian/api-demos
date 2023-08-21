@@ -17,10 +17,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
-public class BaseConfig {
+public class BaseConfig{
 
-    protected AndroidDriver<MobileElement> driver;
-    protected WebDriverWait wait;
+    protected static AndroidDriver<MobileElement> driver;
+    protected static WebDriverWait wait;
 
     @Before
     public void setUp() {
@@ -39,8 +39,6 @@ public class BaseConfig {
             String APP_ACTIVITY     = properties.getProperty("APP_ACTIVITY");
             String APPIUM_HOST      = properties.getProperty("APPIUM_HOST");
             String APPIUM_PORT      = properties.getProperty("APPIUM_PORT");
-
-//            System.out.println(PLATFORM_NAME + PLATFORM_VERSION + DEVICE_NAME + APP + APP_PACKAGE + APP_ACTIVITY + APPIUM_HOST + APPIUM_PORT);
 
             caps.setCapability(MobileCapabilityType.AUTOMATION_NAME,"UiAutomator2");
             caps.setCapability(MobileCapabilityType.PLATFORM_NAME,PLATFORM_NAME);
@@ -73,23 +71,24 @@ public class BaseConfig {
         driver.quit();
     }
 
-    private void popupUpdate() {
 
-        WebDriverWait wait_until = wait(this.getDriver()); // 10 seconds timeout
-        WebElement popup_element = wait_until.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
-
-        popup_element.click();
+    public WebDriverWait wait(AndroidDriver<MobileElement> driver) {
+        return wait = new WebDriverWait(driver, 10);
     }
 
-    private WebDriverWait wait(AndroidDriver<MobileElement> driver) {
-        return this.wait = new WebDriverWait(driver, 10);
-    }
-
-    private AndroidDriver<MobileElement> getDriver(){
+    public static AndroidDriver<MobileElement> getDriver(){
         return driver;
     }
 
     private AndroidDriver<MobileElement> getAndroidDriver(URL url, DesiredCapabilities caps){
         return new AndroidDriver<>(url,caps);
+    }
+
+    private void popupUpdate() {
+
+        WebDriverWait wait_until = wait(getDriver()); // 10 seconds timeout
+        WebElement popup_element = wait_until.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/button1")));
+
+        popup_element.click();
     }
 }
