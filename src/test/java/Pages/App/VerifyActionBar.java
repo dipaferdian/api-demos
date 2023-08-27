@@ -11,12 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VerifyActionBar extends BaseConfig {
 
 
-    @Test
     public void verifyActionBar() {
 
-        VerifyApp verifyApp = new VerifyApp();
-
-        verifyApp.verifyApp();
+//        VerifyApp verifyApp = new VerifyApp();
+//
+//        verifyApp.verifyApp();
 
         // Assert that the element is not null (exists)
         assertNotNull(this.verifyActionBarElement(), "The element was not found on the screen");

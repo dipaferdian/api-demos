@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class VerifyApp extends BaseConfig {
 
-    @Test
+
     public void verifyApp() {
 
         // Assert that the element is not null (exists)

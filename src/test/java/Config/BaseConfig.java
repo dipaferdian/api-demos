@@ -68,7 +68,7 @@ public class BaseConfig{
     @After
     public void tearDown(){
         System.out.println("Close session");
-        driver.quit();
+//        driver.quit();
     }
 
 
